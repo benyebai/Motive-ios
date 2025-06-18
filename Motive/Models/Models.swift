@@ -9,11 +9,24 @@ import Foundation
 
 struct Friend: Identifiable, Codable {
     let id: Int
-    let username: String
+    let friendUsername: String
+    let createdAt: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case friendUsername = "friend_username"
+        case createdAt = "created_at"
+    }
 }
 
 struct FriendRequest: Identifiable, Codable {
     let id: Int
     let fromUserUsername: String
-    let toUserId: Int
+    let timestamp: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case fromUserUsername = "from_user_username"
+        case timestamp
+    }
 }

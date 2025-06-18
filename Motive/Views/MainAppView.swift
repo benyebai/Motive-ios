@@ -8,26 +8,27 @@
 import SwiftUI
 
 struct MainAppView: View {
+    @State private var selectedTab = 0
+    
     var body: some View {
-        
-        TabView {
-            
+        TabView(selection: $selectedTab) {
             HomeView()
                 .tabItem {
-                    Image(systemName: "house")
-                    Text("Home")
+                    Label("Home", systemImage: "house.fill")
                 }
+                .tag(0)
             
             FriendsView()
                 .tabItem {
-                    Image(systemName: "person.2.fill")
-                    Text("Friends")
+                    Label("Friends", systemImage: "person.2.fill")
                 }
-            
+                .tag(1)
         }
+        .tint(.blue) // This sets the accent color for the tab bar
     }
 }
 
 #Preview {
     MainAppView()
+        .environmentObject(AuthViewModel())
 }
