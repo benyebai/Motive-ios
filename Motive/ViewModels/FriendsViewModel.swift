@@ -16,20 +16,25 @@ class FriendsViewModel: ObservableObject {
     @Published var isLoading = false
     
     func loadData(token: String) async {
+        NSLog("🔄 MOTIVE: FriendsViewModel.loadData called")
         isLoading = true
         do {
+            NSLog("🔄 MOTIVE: Starting to fetch friends and requests")
             async let friendsTask = FriendsService.shared.fetchFriends(token: token)
             async let requestsTask = FriendsService.shared.fetchPendingRequests(token: token)
             
+            NSLog("🔄 MOTIVE: Waiting for both tasks to complete")
             let (fetchedFriends, fetchedRequests) = try await (friendsTask, requestsTask)
             
+            NSLog("🔄 MOTIVE: Successfully got friends: \(fetchedFriends.count), requests: \(fetchedRequests.count)")
             self.friends = fetchedFriends
             self.incomingRequests = fetchedRequests
             self.errorMessage = nil
         } catch {
+            NSLog("❌ MOTIVE: Error loading friends data: \(error)")
             self.errorMessage = "Failed to load friends data"
-            print("Error loading friends data:", error)
         }
+        NSLog("🔄 MOTIVE: Setting isLoading to false")
         isLoading = false
     }
     

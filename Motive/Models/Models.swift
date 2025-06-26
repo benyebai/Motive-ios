@@ -30,3 +30,23 @@ struct FriendRequest: Identifiable, Codable {
         case timestamp
     }
 }
+
+struct HangoutEvent: Identifiable, Codable {
+    let id: Int?
+    let title: String
+    let description: String
+    let attendeeCount: Int
+    let dateTime: Date
+    let createdBy: String
+    let createdAt: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case description
+        case attendeeCount = "attendee_count"
+        case dateTime = "date_time"
+        case createdBy = "created_by"
+        case createdAt = "created_at"
+    }
+}

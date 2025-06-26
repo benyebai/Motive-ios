@@ -14,6 +14,7 @@ struct TokenResponse: Codable {
 @MainActor
 class AuthViewModel: ObservableObject {
     @Published var token: String?
+    @Published var username: String?
     @Published var errorMessage: String?
 
     func login(username: String, password: String) async {
@@ -30,6 +31,7 @@ class AuthViewModel: ObservableObject {
             let (data, _) = try await URLSession.shared.data(for: request)
             let decoded = try JSONDecoder().decode(TokenResponse.self, from: data)
             self.token = decoded.token
+            self.username = username
         } catch {
             self.errorMessage = "Login failed"
         }

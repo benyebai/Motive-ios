@@ -18,11 +18,17 @@ struct MainAppView: View {
                 }
                 .tag(0)
             
+            HangoutView()
+                .tabItem {
+                    Label("Hangouts", systemImage: "calendar.badge.plus")
+                }
+                .tag(1)
+            
             FriendsView()
                 .tabItem {
                     Label("Friends", systemImage: "person.2.fill")
                 }
-                .tag(1)
+                .tag(2)
         }
         .tint(.blue) // This sets the accent color for the tab bar
     }
